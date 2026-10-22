@@ -1,0 +1,18 @@
+{
+  "doctors": [
+    { "id": 1, "name": "Dr. Amina Odhiambo", "specialty": "General practitioner", "workingDays": [1,2,3,4,5], "startTime": "08:00", "endTime": "17:00", "slotMinutes": 30, "available": true },
+    { "id": 2, "name": "Dr. Peter Kamau", "specialty": "Pediatrician", "workingDays": [1,2,3,4], "startTime": "09:00", "endTime": "16:00", "slotMinutes": 20, "available": true },
+    { "id": 3, "name": "Dr. Grace Wanjiku", "specialty": "Dentist", "workingDays": [1,2,3,4,5,6], "startTime": "08:00", "endTime": "14:00", "slotMinutes": 30, "available": true },
+    { "id": 4, "name": "Dr. Samuel Otieno", "specialty": "Cardiologist", "workingDays": [2,3,4,5], "startTime": "10:00", "endTime": "18:00", "slotMinutes": 45, "available": true },
+    { "id": 5, "name": "Dr. Faith Njeri", "specialty": "Dermatologist", "workingDays": [3,4,5], "startTime": "09:00", "endTime": "15:00", "slotMinutes": 30, "available": true },
+    { "id": 6, "name": "Dr. Daniel Mwangi", "specialty": "Gynecologist", "workingDays": [1,2,3,4,5], "startTime": "08:30", "endTime": "16:30", "slotMinutes": 30, "available": true }
+  ],
+  "appointments": [
+    { "id": 1, "doctorId": 1, "patientName": "Jane Wanjiru", "phone": "0712345678", "reason": "Follow-up visit", "date": "2026-10-27", "time": "10:30", "status": "Confirmed", "createdAt": "2026-10-22T08:00:00Z" },
+    { "id": 2, "doctorId": 1, "patientName": "Brian Kiptoo", "phone": "0722111902", "reason": "Fever and cough", "date": "2026-10-27", "time": "09:30", "status": "Booked", "createdAt": "2026-10-22T08:15:00Z" },
+    { "id": 3, "doctorId": 3, "patientName": "Kevin Maina", "phone": "0701889343", "reason": "Tooth pain", "date": "2026-10-27", "time": "11:00", "status": "Booked", "createdAt": "2026-10-22T08:30:00Z" },
+    { "id": 4, "doctorId": 2, "patientName": "Lucy Chebet", "phone": "0745220817", "reason": "Child vaccination", "date": "2026-10-28", "time": "14:00", "status": "Booked", "createdAt": "2026-10-22T09:00:00Z" },
+    { "id": 5, "doctorId": 4, "patientName": "Hassan Ali", "phone": "0799604255", "reason": "ECG results review", "date": "2026-10-28", "time": "11:30", "status": "Cancelled", "createdAt": "2026-10-22T09:10:00Z" },
+    { "id": 6, "doctorId": 1, "patientName": "Mary Akinyi", "phone": "0733456120", "reason": "Blood pressure check", "date": "2026-10-26", "time": "09:00", "status": "Completed", "createdAt": "2026-10-21T10:00:00Z" }
+  ]
+}
