@@ -1,0 +1,24 @@
+{
+  "name": "clinic-appointment-booking.",
+  "version": "1.0.0",
+  "description": "The Clinic Appointment Booking System is a web application that lets patients view doctors, check available time slots and book appointments online.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brovincemangwana/clinic-appointment-booking..git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/brovincemangwana/clinic-appointment-booking./issues"
+  },
+  "homepage": "https://github.com/brovincemangwana/clinic-appointment-booking.#readme"
+}
