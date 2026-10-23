@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MediBook – Book a doctor</title>
+  <link rel="stylesheet" href="src/css/styles.css">
+</head>
+<body>
+  <header class="top">
+    <a class="logo" href="index.html"><span class="mark"></span>MediBook</a>
+    <nav aria-label="Main">
+      <a class="on" href="index.html">Doctors</a>
+      <a href="#">My appointments</a>
+      <a href="#">Staff login</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Book a doctor’s appointment</h1>
+    <p>Choose a doctor, pick a time slot and confirm in under a minute.</p>
+    <form id="filters" class="filters">
+      <div class="field">
+        <label for="search">Search</label>
+        <input id="search" type="search" placeholder="Search by doctor name">
+      </div>
+      <div class="field narrow">
+        <label for="specialty">Specialty</label>
+        <select id="specialty"><option value="">All specialties</option></select>
+      </div>
+      <button class="btn primary" type="submit">Search</button>
+    </form>
+  </section>
+
+  <main class="list">
+    <div class="list-head">
+      <h2>Available doctors</h2>
+      <span id="count" class="muted"></span>
+    </div>
+    <p id="status" class="status" role="status" aria-live="polite"></p>
+    <div id="doctors" class="grid"></div>
+  </main>
+
+  <script type="module" src="src/js/main.js"></script>
+</body>
+</html>
