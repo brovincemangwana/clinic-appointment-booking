@@ -7,9 +7,10 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest run",
     "api": "json-server --watch db.json --port 3000",
-    "start": "python3 -m http.server 5500"
+    "start": "python3 -m http.server 5500",
+    "test:coverage": "vitest run --coverage"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,8 @@
   },
   "homepage": "https://github.com/brovincemangwana/clinic-appointment-booking.#readme",
   "devDependencies": {
-    "json-server": "^0.17.4"
+    "@vitest/coverage-v8": "^2.1.9",
+    "json-server": "^0.17.4",
+    "vitest": "^2.1.9"
   }
 }
