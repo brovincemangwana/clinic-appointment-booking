@@ -27,3 +27,9 @@ export function getAppointments(params = {}) {
   const query = new URLSearchParams(params).toString();
   return request(`/appointments${query ? `?${query}` : ''}`);
 }
+export function createAppointment(data) {
+  return request('/appointments', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
+}
