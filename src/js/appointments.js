@@ -1,4 +1,4 @@
-import { normalizePhone } from './validation.js';
+import { normalizePhone, todayISO } from './validation.js';
 
 export function buildAppointment(
   { doctorId, name, phone, reason, date, time },
@@ -14,4 +14,15 @@ export function buildAppointment(
     status: 'Booked',
     createdAt: now.toISOString(),
   };
+}
+
+export function canModify(appointment, today = todayISO()) {
+  return ['Booked', 'Confirmed'].includes(appointment.status) && appointment.date >= today;
+}
+
+export function sortAppointments(list, today = todayISO()) {
+  const byDate = (a, b) => `${a.date} ${a.time}`.localeCompare(`${b.date} ${b.time}`);
+  const upcoming = list.filter((a) => a.date >= today).sort(byDate);
+  const past = list.filter((a) => a.date < today).sort((a, b) => byDate(b, a));
+  return [...upcoming, ...past];
 }
