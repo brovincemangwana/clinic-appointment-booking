@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MediBook – My appointments</title>
+  <link rel="stylesheet" href="src/css/styles.css">
+</head>
+<body>
+  <header class="top">
+    <a class="logo" href="index.html"><span class="mark"></span>MediBook</a>
+    <nav aria-label="Main">
+      <a href="index.html">Doctors</a>
+      <a class="on" href="my-appointments.html">My appointments</a>
+      <a href="#">Staff login</a>
+    </nav>
+  </header>
+
+  <main class="lookup">
+    <h1>My appointments</h1>
+    <p class="muted">Enter the phone number you booked with to view, reschedule or cancel.</p>
+
+    <form id="lookup-form" class="card lookup-form" novalidate>
+      <div class="field">
+        <label for="phone">Phone number</label>
+        <input id="phone" type="tel" autocomplete="tel" placeholder="e.g. 0712 345 678">
+        <p id="phone-error" class="error-text"></p>
+      </div>
+      <button class="btn primary" type="submit">Find appointments</button>
+    </form>
+
+    <p id="status" class="status" role="status" aria-live="polite"></p>
+    <div id="results" class="results"></div>
+  </main>
+</body>
+</html>
