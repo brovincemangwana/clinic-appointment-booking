@@ -403,3 +403,11 @@ textarea.invalid {
     gap: 16px
 }
 
+.appt{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px}
+.appt h3{font-size:16px}
+.appt-actions{display:flex;gap:12px;align-items:center}
+.badge{padding:4px 10px;border-radius:20px;font-size:12px;font-weight:600;background:var(--ph);color:var(--navy)}
+.badge-confirmed{background:var(--blueL);color:var(--blue)}
+.badge-cancelled{background:#FDE6E2;color:#B8392B}
+.badge-completed{color:var(--mute)}
+.btn.danger{color:var(--coral);border-color:var(--coral)}
