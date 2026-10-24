@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MediBook – Book an appointment</title>
+  <link rel="stylesheet" href="src/css/styles.css">
+</head>
+<body>
+  <header class="top">
+    <a class="logo" href="index.html"><span class="mark"></span>MediBook</a>
+    <nav aria-label="Main">
+      <a class="on" href="index.html">Doctors</a>
+      <a href="#">My appointments</a>
+      <a href="#">Staff login</a>
+    </nav>
+  </header>
+
+  <main class="booking">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="index.html">Doctors</a> / <span id="crumb-name">Doctor</span>
+    </nav>
+    <p id="status" class="status" role="status" aria-live="polite"></p>
+
+    <div class="booking-cols">
+      <div class="stack">
+        <section id="profile" class="card profile" aria-label="Doctor profile"></section>
+
+        <section class="card schedule" aria-label="Date and time">
+          <h2>1 Pick a date</h2>
+          <div id="dates" class="dates"></div>
+          <h2>2 Pick a time</h2>
+          <div id="slots" class="slots"></div>
+          <p class="muted small">Grey slots are already booked.</p>
+        </section>
+      </div>
+
+      <form id="booking-form" class="card form" novalidate>
+        <h2>3 Your details</h2>
+        <div class="field">
+          <label for="name">Full name</label>
+          <input id="name" name="name" autocomplete="name" placeholder="e.g. Jane Wanjiru">
+          <p id="name-error" class="error-text"></p>
+        </div>
+        <div class="field">
+          <label for="phone">Phone number</label>
+          <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="e.g. 0712 345 678">
+          <p id="phone-error" class="error-text"></p>
+        </div>
+        <div class="field">
+          <label for="reason">Reason for visit</label>
+          <textarea id="reason" name="reason" rows="3" placeholder="Briefly describe your visit"></textarea>
+          <p id="reason-error" class="error-text"></p>
+        </div>
+        <div id="summary" class="summary" aria-live="polite">Select a date and time to continue.</div>
+        <p id="slot-error" class="error-text"></p>
+        <button class="btn primary" type="submit">Confirm booking</button>
+      </form>
+    </div>
+  </main>
+</body>
+</html>
