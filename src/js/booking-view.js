@@ -60,3 +60,17 @@ export function renderSummary(container, doctor, date, time) {
     el('div', '', doctor.name)
   );
 }
+
+const FIELDS = ['name', 'phone', 'reason'];
+
+export function showFormErrors(form, errors) {
+  FIELDS.forEach((field) => {
+    const input = form.querySelector(`#${field}`);
+    const message = form.querySelector(`#${field}-error`);
+    const text = errors[field] || '';
+    message.textContent = text;
+    input.classList.toggle('invalid', Boolean(text));
+    input.setAttribute('aria-invalid', String(Boolean(text)));
+  });
+  form.querySelector('#slot-error').textContent = errors.time || errors.date || '';
+}
