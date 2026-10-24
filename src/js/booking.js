@@ -1,19 +1,34 @@
-import { getDoctor } from './api.js';
+import { getDoctor, getAppointments } from './api.js';
 import { getUpcomingDates } from './dates.js';
-import { renderProfile, renderDates } from './booking-view.js';
+import { getAvailableSlots } from './slots.js';
+import { renderProfile, renderDates, renderSlots, renderSummary } from './booking-view.js';
 import { showLoading, showError, clearStatus } from './ui.js';
 
 const status = document.querySelector('#status');
 const profile = document.querySelector('#profile');
 const datesContainer = document.querySelector('#dates');
+const slotsContainer = document.querySelector('#slots');
+const summary = document.querySelector('#summary');
 const crumb = document.querySelector('#crumb-name');
 
-const state = { doctor: null, dates: [], date: '', time: '' };
+const state = { doctor: null, appointments: [], dates: [], date: '', time: '' };
+
+function refresh() {
+  renderDates(datesContainer, state.dates, state.date, selectDate);
+  const slots = getAvailableSlots(state.doctor, state.date, state.appointments);
+  renderSlots(slotsContainer, slots, state.time, selectTime);
+  renderSummary(summary, state.doctor, state.date, state.time);
+}
 
 function selectDate(iso) {
   state.date = iso;
   state.time = '';
-  renderDates(datesContainer, state.dates, state.date, selectDate);
+  refresh();
+}
+
+function selectTime(time) {
+  state.time = time;
+  refresh();
 }
 
 async function init() {
@@ -28,6 +43,13 @@ async function init() {
     state.doctor = await getDoctor(id);
   } catch {
     showError(status, 'Could not load this doctor. Check the link and that the API is running.');
+    return;
+  }
+
+  try {
+    state.appointments = await getAppointments({ doctorId: state.doctor.id });
+  } catch {
+    showError(status, 'Could not load availability. Check that the API is running.');
     return;
   }
 
