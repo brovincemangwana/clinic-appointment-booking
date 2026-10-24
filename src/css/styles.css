@@ -411,3 +411,10 @@ textarea.invalid {
 .badge-cancelled{background:#FDE6E2;color:#B8392B}
 .badge-completed{color:var(--mute)}
 .btn.danger{color:var(--coral);border-color:var(--coral)}
+.dialog{border:1px solid var(--line);border-radius:12px;padding:0;width:min(640px,calc(100% - 32px));color:var(--navy);margin:auto}
+.dialog::backdrop{background:rgba(15,31,61,.45)}
+.dialog-body{padding:24px;display:flex;flex-direction:column;gap:16px}
+.dialog-body h2{font-size:20px}
+.dialog-body h3{font-size:14px}
+.dialog .slots{max-height:240px;overflow:auto}
+.dialog-actions{display:flex;justify-content:flex-end;gap:12px}

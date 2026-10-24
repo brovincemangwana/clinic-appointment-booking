@@ -32,6 +32,21 @@
     <p id="status" class="status" role="status" aria-live="polite"></p>
     <div id="results" class="results"></div>
   </main>
+    <dialog id="reschedule-dialog" class="dialog" aria-labelledby="rs-title">
+    <form id="reschedule-form" class="dialog-body" novalidate>
+      <h2 id="rs-title">Reschedule appointment</h2>
+      <p id="rs-doctor" class="muted"></p>
+      <h3>Pick a new date</h3>
+      <div id="rs-dates" class="dates"></div>
+      <h3>Pick a new time</h3>
+      <div id="rs-slots" class="slots"></div>
+      <p id="rs-error" class="error-text" role="alert"></p>
+      <div class="dialog-actions">
+        <button class="btn" type="button" id="rs-close">Keep current time</button>
+        <button class="btn primary" type="submit" id="rs-save">Save new time</button>
+      </div>
+    </form>
+  </dialog>
     <script type="module" src="src/js/my-appointments.js"></script>
 </body>
 </html>
