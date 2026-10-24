@@ -26,3 +26,13 @@ export function sortAppointments(list, today = todayISO()) {
   const past = list.filter((a) => a.date < today).sort((a, b) => byDate(b, a));
   return [...upcoming, ...past];
 }
+
+export function buildRescheduled(appointment, { date, time }, now = new Date()) {
+  return {
+    ...appointment,
+    date,
+    time,
+    status: 'Booked',
+    updatedAt: now.toISOString(),
+  };
+}
