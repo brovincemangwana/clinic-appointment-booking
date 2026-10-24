@@ -1,6 +1,6 @@
 import { el } from './ui.js';
 import { formatDays } from './doctors.js';
-import { formatDateShort } from './dates.js';
+import { formatDateShort, formatDateLong } from './dates.js';
 import { formatTime } from './slots.js';
 
 export function renderProfile(container, doctor) {
@@ -30,4 +30,33 @@ export function renderDates(container, dates, selected, onSelect) {
     return button;
   });
   container.replaceChildren(...buttons);
+}
+
+export function renderSlots(container, slots, selected, onSelect) {
+  if (slots.length === 0) {
+    container.replaceChildren(el('p', 'muted', 'No slots available on this date.'));
+    return;
+  }
+  const buttons = slots.map(({ time, booked }) => {
+    const button = el('button', `slot-btn${time === selected ? ' is-selected' : ''}`, formatTime(time));
+    button.type = 'button';
+    button.disabled = booked;
+    button.dataset.time = time;
+    button.setAttribute('aria-pressed', String(time === selected));
+    button.addEventListener('click', () => onSelect(time));
+    return button;
+  });
+  container.replaceChildren(...buttons);
+}
+
+export function renderSummary(container, doctor, date, time) {
+  if (!date || !time) {
+    container.textContent = 'Select a date and time to continue.';
+    return;
+  }
+  container.replaceChildren(
+    el('small', '', 'Selected slot'),
+    el('b', '', `${formatDateLong(date)} · ${formatTime(time)}`),
+    el('div', '', doctor.name)
+  );
 }

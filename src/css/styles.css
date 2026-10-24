@@ -58,3 +58,4 @@ textarea{font:inherit;padding:11px 14px;border:1px solid var(--line);border-radi
 input.invalid,textarea.invalid{border-color:var(--coral)}
 .summary{background:var(--blueL);border-radius:8px;padding:14px}
 .summary small{display:block;color:var(--mute);font-size:12px}
+.slots p{grid-column:1/-1}
