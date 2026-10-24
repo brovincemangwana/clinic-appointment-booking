@@ -33,3 +33,16 @@ export function createAppointment(data) {
     body: JSON.stringify(data),
   });
 }
+export function updateAppointment(id, data) {
+  return request(`/appointments/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+  });
+}
+
+export function patchAppointment(id, data) {
+  return request(`/appointments/${id}`, {
+    method: 'PATCH',
+    body: JSON.stringify(data),
+  });
+}

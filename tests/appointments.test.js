@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { buildAppointment } from '../src/js/appointments.js';
-
+import { buildAppointment, canModify, sortAppointments, buildRescheduled } from '../src/js/appointments.js';
 const now = new Date('2026-10-24T08:00:00Z');
 const form = {
   doctorId: '1',
@@ -35,5 +34,91 @@ describe('buildAppointment', () => {
 
   it('always starts with the Booked status', () => {
     expect(buildAppointment(form, now).status).toBe('Booked');
+  });
+});
+
+describe('canModify', () => {
+  const TODAY = '2026-10-24';
+  const base = { status: 'Booked', date: '2026-10-27' };
+
+  it('allows a future Booked appointment', () => {
+    expect(canModify(base, TODAY)).toBe(true);
+  });
+
+  it('allows a Confirmed appointment today', () => {
+    expect(canModify({ status: 'Confirmed', date: TODAY }, TODAY)).toBe(true);
+  });
+
+  it('blocks Completed appointments', () => {
+    expect(canModify({ ...base, status: 'Completed' }, TODAY)).toBe(false);
+  });
+
+  it('blocks Cancelled appointments', () => {
+    expect(canModify({ ...base, status: 'Cancelled' }, TODAY)).toBe(false);
+  });
+
+  it('blocks appointments in the past', () => {
+    expect(canModify({ ...base, date: '2026-10-20' }, TODAY)).toBe(false);
+  });
+});
+
+describe('sortAppointments', () => {
+  const TODAY = '2026-10-24';
+  const list = [
+    { id: 'a', date: '2026-10-20', time: '10:00' },
+    { id: 'b', date: '2026-10-27', time: '09:00' },
+    { id: 'c', date: '2026-10-25', time: '11:00' },
+    { id: 'd', date: '2026-10-22', time: '08:00' },
+  ];
+
+  it('lists upcoming first (soonest first), then past (latest first)', () => {
+    expect(sortAppointments(list, TODAY).map((a) => a.id)).toEqual(['c', 'b', 'd', 'a']);
+  });
+
+  it('does not change the original array', () => {
+    sortAppointments(list, TODAY);
+    expect(list.map((a) => a.id)).toEqual(['a', 'b', 'c', 'd']);
+  });
+});
+describe('buildRescheduled', () => {
+  const now = new Date('2026-10-24T08:00:00Z');
+  const original = {
+    id: 1,
+    doctorId: 1,
+    patientName: 'Jane Wanjiru',
+    phone: '0712345678',
+    reason: 'Follow-up visit',
+    date: '2026-10-27',
+    time: '10:30',
+    status: 'Confirmed',
+    createdAt: '2026-10-22T08:00:00Z',
+  };
+
+  it('changes the date and time', () => {
+    const result = buildRescheduled(original, { date: '2026-10-28', time: '09:00' }, now);
+    expect(result.date).toBe('2026-10-28');
+    expect(result.time).toBe('09:00');
+  });
+
+  it('keeps the id and patient details', () => {
+    const result = buildRescheduled(original, { date: '2026-10-28', time: '09:00' }, now);
+    expect(result.id).toBe(1);
+    expect(result.patientName).toBe('Jane Wanjiru');
+    expect(result.phone).toBe('0712345678');
+    expect(result.reason).toBe('Follow-up visit');
+  });
+
+  it('resets the status to Booked so staff can confirm again', () => {
+    expect(buildRescheduled(original, { date: '2026-10-28', time: '09:00' }, now).status).toBe('Booked');
+  });
+
+  it('records when it was updated', () => {
+    expect(buildRescheduled(original, { date: '2026-10-28', time: '09:00' }, now).updatedAt).toBe('2026-10-24T08:00:00.000Z');
+  });
+
+  it('does not change the original appointment', () => {
+    buildRescheduled(original, { date: '2026-10-28', time: '09:00' }, now);
+    expect(original.date).toBe('2026-10-27');
+    expect(original.status).toBe('Confirmed');
   });
 });
