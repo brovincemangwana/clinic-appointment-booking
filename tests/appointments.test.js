@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { buildAppointment } from '../src/js/appointments.js';
+import { buildAppointment, canModify, sortAppointments } from '../src/js/appointments.js';
 
 const now = new Date('2026-10-24T08:00:00Z');
 const form = {
@@ -35,5 +35,49 @@ describe('buildAppointment', () => {
 
   it('always starts with the Booked status', () => {
     expect(buildAppointment(form, now).status).toBe('Booked');
+  });
+});
+
+describe('canModify', () => {
+  const TODAY = '2026-10-24';
+  const base = { status: 'Booked', date: '2026-10-27' };
+
+  it('allows a future Booked appointment', () => {
+    expect(canModify(base, TODAY)).toBe(true);
+  });
+
+  it('allows a Confirmed appointment today', () => {
+    expect(canModify({ status: 'Confirmed', date: TODAY }, TODAY)).toBe(true);
+  });
+
+  it('blocks Completed appointments', () => {
+    expect(canModify({ ...base, status: 'Completed' }, TODAY)).toBe(false);
+  });
+
+  it('blocks Cancelled appointments', () => {
+    expect(canModify({ ...base, status: 'Cancelled' }, TODAY)).toBe(false);
+  });
+
+  it('blocks appointments in the past', () => {
+    expect(canModify({ ...base, date: '2026-10-20' }, TODAY)).toBe(false);
+  });
+});
+
+describe('sortAppointments', () => {
+  const TODAY = '2026-10-24';
+  const list = [
+    { id: 'a', date: '2026-10-20', time: '10:00' },
+    { id: 'b', date: '2026-10-27', time: '09:00' },
+    { id: 'c', date: '2026-10-25', time: '11:00' },
+    { id: 'd', date: '2026-10-22', time: '08:00' },
+  ];
+
+  it('lists upcoming first (soonest first), then past (latest first)', () => {
+    expect(sortAppointments(list, TODAY).map((a) => a.id)).toEqual(['c', 'b', 'd', 'a']);
+  });
+
+  it('does not change the original array', () => {
+    sortAppointments(list, TODAY);
+    expect(list.map((a) => a.id)).toEqual(['a', 'b', 'c', 'd']);
   });
 });
