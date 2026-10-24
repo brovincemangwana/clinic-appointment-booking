@@ -19,3 +19,8 @@ export function clearStatus(target) {
   target.className = 'status';
   target.textContent = '';
 }
+
+export function showSuccess(target, message) {
+  target.className = 'status success';
+  target.textContent = message;
+}

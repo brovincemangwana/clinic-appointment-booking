@@ -18,3 +18,18 @@ export function getDoctors({ specialty = '', search = '' } = {}) {
   const query = params.toString();
   return request(`/doctors${query ? `?${query}` : ''}`);
 }
+
+export function getDoctor(id) {
+  return request(`/doctors/${id}`);
+}
+
+export function getAppointments(params = {}) {
+  const query = new URLSearchParams(params).toString();
+  return request(`/appointments${query ? `?${query}` : ''}`);
+}
+export function createAppointment(data) {
+  return request('/appointments', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
+}
