@@ -141,3 +141,12 @@ describe('validateBooking', () => {
     expect(Object.keys(errors).sort()).toEqual(['date', 'name', 'phone', 'time']);
   });
 });
+describe('missing values', () => {
+  it('treats undefined and null as empty', () => {
+    expect(validateName(undefined)).toBe('Enter your full name.');
+    expect(validatePhone(undefined)).toBe('Enter your phone number.');
+    expect(validateReason(undefined)).toBe('Tell us briefly why you are visiting.');
+    expect(validateDate(undefined, TODAY)).toBe('Choose a date.');
+    expect(validateTime(null)).toBe('Choose a time slot.');
+  });
+});

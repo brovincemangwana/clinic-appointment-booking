@@ -129,3 +129,9 @@ describe('hasActiveAppointments', () => {
     expect(hasActiveAppointments(list, 6, TODAY)).toBe(true);
   });
 });
+describe('validateDoctor with missing values', () => {
+  it('reports every required field when nothing is provided', () => {
+    const errors = validateDoctor({});
+    expect(Object.keys(errors).sort()).toEqual(['days', 'name', 'slotMinutes', 'specialty', 'time']);
+  });
+});
