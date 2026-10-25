@@ -46,3 +46,20 @@ export function patchAppointment(id, data) {
     body: JSON.stringify(data),
   });
 }
+export function createDoctor(data) {
+  return request('/doctors', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
+}
+
+export function updateDoctor(id, data) {
+  return request(`/doctors/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+  });
+}
+
+export function deleteDoctor(id) {
+  return request(`/doctors/${id}`, { method: 'DELETE' });
+}
