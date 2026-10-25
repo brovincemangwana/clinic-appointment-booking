@@ -477,3 +477,27 @@ tr.is-editing td{background:var(--blueL)}
   .filters{flex-wrap:wrap}
   .filters .field{min-width:160px}
 }
+@media (max-width:640px){
+  .top{flex-wrap:wrap;gap:12px;padding:14px 16px}
+  .top nav{display:flex;flex-wrap:wrap;gap:4px 16px;width:100%}
+  .top nav a{margin-left:0}
+  .hero{padding:32px 16px}
+  .hero h1{font-size:28px}
+  .filters{flex-direction:column;align-items:stretch}
+  .filters .field{flex:none}
+  .field.narrow{width:100%}
+  .list,.booking{padding:24px 16px}
+  .list-head{flex-direction:column;align-items:flex-start;gap:4px}
+  .grid{grid-template-columns:1fr}
+  .profile{flex-direction:column;align-items:flex-start}
+  .dates{grid-template-columns:repeat(4,1fr)}
+  .slots{grid-template-columns:repeat(2,1fr)}
+  .lookup{padding:32px 16px}
+  .lookup-form{flex-direction:column}
+  .lookup-form .btn{margin-top:0;width:100%}
+  .appt{flex-direction:column;align-items:flex-start}
+  .appt-actions{flex-wrap:wrap}
+  .dialog-actions{flex-direction:column-reverse}
+  .dialog-actions .btn{width:100%}
+  .time-row{flex-direction:column}
+}
