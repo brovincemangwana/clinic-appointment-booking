@@ -439,3 +439,6 @@ th{text-align:left;font-size:12px;font-weight:600;color:var(--mute);background:v
 td{padding:14px 12px;border-top:1px solid var(--line);white-space:nowrap}
 th:first-child,td:first-child{padding-left:20px}
 td.empty{text-align:center;color:var(--mute);padding:32px}
+.row-actions{display:flex;gap:8px}
+.btn.sm{padding:6px 12px;font-size:13px}
+.btn:disabled{opacity:.6;cursor:not-allowed}

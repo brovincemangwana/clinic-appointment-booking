@@ -1,67 +1,75 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MediBook Admin – Appointments</title>
-  <link rel="stylesheet" href="src/css/styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MediBook Admin – Appointments</title>
+    <link rel="stylesheet" href="src/css/styles.css">
 </head>
+
 <body class="admin">
-  <aside class="side">
-    <a class="logo" href="index.html"><span class="mark"></span>MediBook <small>Admin</small></a>
-    <nav aria-label="Admin">
-      <a class="on" href="admin.html">Appointments</a>
-      <a href="#">Doctors</a>
-    </nav>
-    <a class="out" href="index.html">Back to site</a>
-  </aside>
+    <aside class="side">
+        <a class="logo" href="index.html"><span class="mark"></span>MediBook <small>Admin</small></a>
+        <nav aria-label="Admin">
+            <a class="on" href="admin.html">Appointments</a>
+            <a href="#">Doctors</a>
+        </nav>
+        <a class="out" href="index.html">Back to site</a>
+    </aside>
 
-  <main class="admin-main">
-    <header class="admin-head"><h1>Appointments</h1></header>
+    <main class="admin-main">
+        <header class="admin-head">
+            <h1>Appointments</h1>
+        </header>
 
-    <div id="stats" class="stats" aria-label="Appointment totals"></div>
+        <div id="stats" class="stats" aria-label="Appointment totals"></div>
 
-    <form id="filters" class="card filters">
-      <div class="field">
-        <label for="f-date">Date</label>
-        <input id="f-date" type="date">
-      </div>
-      <div class="field">
-        <label for="f-doctor">Doctor</label>
-        <select id="f-doctor"><option value="">All doctors</option></select>
-      </div>
-      <div class="field">
-        <label for="f-status">Status</label>
-        <select id="f-status">
-          <option value="">All statuses</option>
-          <option>Booked</option>
-          <option>Confirmed</option>
-          <option>Completed</option>
-          <option>Cancelled</option>
-        </select>
-      </div>
-      <button class="btn" type="button" id="clear-filters">Reset</button>
-    </form>
+        <form id="filters" class="card filters">
+            <div class="field">
+                <label for="f-date">Date</label>
+                <input id="f-date" type="date">
+            </div>
+            <div class="field">
+                <label for="f-doctor">Doctor</label>
+                <select id="f-doctor">
+                    <option value="">All doctors</option>
+                </select>
+            </div>
+            <div class="field">
+                <label for="f-status">Status</label>
+                <select id="f-status">
+                    <option value="">All statuses</option>
+                    <option>Booked</option>
+                    <option>Confirmed</option>
+                    <option>Completed</option>
+                    <option>Cancelled</option>
+                </select>
+            </div>
+            <button class="btn" type="button" id="clear-filters">Reset</button>
+        </form>
 
-    <p id="status" class="status" role="status" aria-live="polite"></p>
+        <p id="status" class="status" role="status" aria-live="polite"></p>
 
-    <div class="card table-card">
-      <table>
-        <thead>
-          <tr>
-            <th scope="col">Date and time</th>
-            <th scope="col">Patient</th>
-            <th scope="col">Phone</th>
-            <th scope="col">Doctor</th>
-            <th scope="col">Reason</th>
-            <th scope="col">Status</th>
-          </tr>
-        </thead>
-        <tbody id="rows"></tbody>
-      </table>
-    </div>
-  </main>
+        <div class="card table-card">
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">Date and time</th>
+                        <th scope="col">Patient</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Doctor</th>
+                        <th scope="col">Reason</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="rows"></tbody>
+            </table>
+        </div>
+    </main>
 
-  <script type="module" src="src/js/admin.js"></script>
+    <script type="module" src="src/js/admin.js"></script>
 </body>
+
 </html>
