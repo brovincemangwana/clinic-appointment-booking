@@ -34,7 +34,7 @@ function draw() {
   );
 }
 
-async function changeStatus(appointment, newStatus) {
+export async function changeStatus(appointment, newStatus) {
   if (!canTransition(appointment.status, newStatus)) {
     showError(status, `A ${appointment.status} appointment cannot be changed to ${newStatus}.`);
     draw();
