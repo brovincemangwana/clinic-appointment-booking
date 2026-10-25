@@ -33,11 +33,10 @@ function doctorCard(doctor) {
     'hours',
     `${formatDays(doctor.workingDays)} · ${doctor.startTime} – ${doctor.endTime}`
   );
-  const button = el('button', 'btn', 'View slots');
-  button.type = 'button';
-  button.dataset.doctorId = doctor.id;
+  const link = el('a', 'btn', 'View slots');
+  link.href = `booking.html?doctor=${doctor.id}`;
 
-  card.append(top, hours, button);
+  card.append(top, hours, link);
   return card;
 }
 

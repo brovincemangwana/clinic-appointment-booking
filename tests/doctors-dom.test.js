@@ -33,12 +33,12 @@ describe('renderDoctors', () => {
     expect(card.querySelector('.hours').textContent).toBe('Mon – Fri · 08:00 – 17:00');
   });
 
-  it('puts the doctor id on the View slots button', () => {
+  it('links View slots to the booking page for that doctor', () => {
     const container = document.createElement('div');
     renderDoctors(container, doctors);
-    const button = container.querySelector('button');
-    expect(button.dataset.doctorId).toBe('1');
-    expect(button.type).toBe('button');
+    const link = container.querySelector('a.btn');
+    expect(link.textContent).toBe('View slots');
+    expect(link.getAttribute('href')).toBe('booking.html?doctor=1');
   });
 
   it('replaces the previous cards when rendered again', () => {
