@@ -460,3 +460,10 @@ select.invalid{border-color:var(--coral)}
 tr.is-editing td{background:var(--blueL)}
 .badge-available{background:var(--blueL);color:var(--blue)}
 .badge-unavailable{color:var(--mute)}
+@media (max-width:1024px){
+  .hero,.list{padding-left:40px;padding-right:40px}
+  .booking{padding-left:40px;padding-right:40px}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .booking-cols,.two-col{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+}
