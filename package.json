@@ -10,7 +10,8 @@
     "test": "vitest run",
     "api": "json-server --watch db.json --port 3000",
     "start": "python3 -m http.server 5500",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "start:api": "json-server --host 0.0.0.0 --port ${PORT:-3000} db.json"
   },
   "repository": {
     "type": "git",
