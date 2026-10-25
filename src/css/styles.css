@@ -431,8 +431,8 @@ body.admin{display:flex;min-height:100vh}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .stat{padding:20px;display:flex;flex-direction:column;gap:4px}
 .stat b{font-size:28px}
-.filters{display:flex;gap:16px;align-items:flex-end;padding:20px}
-.filters .field{flex:1}
+.admin-main .filters{display:flex;gap:16px;align-items:flex-end;padding:20px}
+.admin-main .filters .field{flex:1}
 .table-card{padding:0;overflow-x:auto}
 table{width:100%;border-collapse:collapse}
 th{text-align:left;font-size:12px;font-weight:600;color:var(--mute);background:var(--bg);padding:12px}
