@@ -56,3 +56,17 @@ export function filterAppointments(list, { date = '', doctorId = '', status = ''
 export function sortChronological(list) {
   return [...list].sort((a, b) => `${a.date} ${a.time}`.localeCompare(`${b.date} ${b.time}`));
 }
+const TRANSITIONS = {
+  Booked: ['Confirmed', 'Cancelled'],
+  Confirmed: ['Completed', 'Cancelled'],
+  Completed: [],
+  Cancelled: [],
+};
+
+export function nextStatuses(status) {
+  return TRANSITIONS[status] ? [...TRANSITIONS[status]] : [];
+}
+
+export function canTransition(from, to) {
+  return nextStatuses(from).includes(to);
+}
