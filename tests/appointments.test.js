@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { buildAppointment, canModify, sortAppointments, buildRescheduled } from '../src/js/appointments.js';
+import { buildAppointment, canModify, sortAppointments, buildRescheduled, countByStatus, filterAppointments, sortChronological, nextStatuses, canTransition } from '../src/js/appointments.js';
 const now = new Date('2026-10-24T08:00:00Z');
 const form = {
   doctorId: '1',
@@ -120,5 +120,91 @@ describe('buildRescheduled', () => {
     buildRescheduled(original, { date: '2026-10-28', time: '09:00' }, now);
     expect(original.date).toBe('2026-10-27');
     expect(original.status).toBe('Confirmed');
+  });
+});
+describe('admin helpers', () => {
+  const list = [
+    { id: 1, doctorId: 1, date: '2026-10-27', time: '10:30', status: 'Confirmed' },
+    { id: 2, doctorId: 1, date: '2026-10-27', time: '09:30', status: 'Booked' },
+    { id: 3, doctorId: 3, date: '2026-10-28', time: '11:00', status: 'Booked' },
+    { id: 4, doctorId: 2, date: '2026-10-26', time: '09:00', status: 'Completed' },
+    { id: 5, doctorId: 4, date: '2026-10-28', time: '11:30', status: 'Cancelled' },
+  ];
+  const ids = (items) => items.map((a) => a.id);
+
+  it('counts appointments by status', () => {
+    expect(countByStatus(list)).toEqual({
+      total: 5,
+      Booked: 2,
+      Confirmed: 1,
+      Completed: 1,
+      Cancelled: 1,
+    });
+  });
+
+  it('filters by date', () => {
+    expect(ids(filterAppointments(list, { date: '2026-10-27' }))).toEqual([1, 2]);
+  });
+
+  it('filters by doctor', () => {
+    expect(ids(filterAppointments(list, { doctorId: '1' }))).toEqual([1, 2]);
+  });
+
+  it('filters by status', () => {
+    expect(ids(filterAppointments(list, { status: 'Booked' }))).toEqual([2, 3]);
+  });
+
+  it('combines filters', () => {
+    expect(ids(filterAppointments(list, { date: '2026-10-27', doctorId: '1', status: 'Booked' }))).toEqual([2]);
+  });
+
+  it('returns everything when no filters are set', () => {
+    expect(ids(filterAppointments(list))).toEqual([1, 2, 3, 4, 5]);
+  });
+
+  it('sorts by date and time', () => {
+    expect(ids(sortChronological(list))).toEqual([4, 2, 1, 3, 5]);
+  });
+
+  it('does not change the original list when sorting', () => {
+    sortChronological(list);
+    expect(ids(list)).toEqual([1, 2, 3, 4, 5]);
+  });
+});
+describe('status transitions', () => {
+  it('lets a Booked appointment be confirmed or cancelled', () => {
+    expect(nextStatuses('Booked')).toEqual(['Confirmed', 'Cancelled']);
+  });
+
+  it('lets a Confirmed appointment be completed or cancelled', () => {
+    expect(nextStatuses('Confirmed')).toEqual(['Completed', 'Cancelled']);
+  });
+
+  it('allows no changes once Completed or Cancelled', () => {
+    expect(nextStatuses('Completed')).toEqual([]);
+    expect(nextStatuses('Cancelled')).toEqual([]);
+  });
+
+  it('returns nothing for an unknown status', () => {
+    expect(nextStatuses('Pending')).toEqual([]);
+  });
+
+  it('returns a copy so callers cannot change the rules', () => {
+    nextStatuses('Booked').push('Completed');
+    expect(nextStatuses('Booked')).toEqual(['Confirmed', 'Cancelled']);
+  });
+
+  it('allows valid transitions', () => {
+    expect(canTransition('Booked', 'Confirmed')).toBe(true);
+    expect(canTransition('Confirmed', 'Completed')).toBe(true);
+  });
+
+  it('blocks moving backwards', () => {
+    expect(canTransition('Completed', 'Booked')).toBe(false);
+    expect(canTransition('Cancelled', 'Confirmed')).toBe(false);
+  });
+
+  it('blocks skipping a step', () => {
+    expect(canTransition('Booked', 'Completed')).toBe(false);
   });
 });
