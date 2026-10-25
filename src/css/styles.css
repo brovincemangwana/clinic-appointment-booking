@@ -442,3 +442,21 @@ td.empty{text-align:center;color:var(--mute);padding:32px}
 .row-actions{display:flex;gap:8px}
 .btn.sm{padding:6px 12px;font-size:13px}
 .btn:disabled{opacity:.6;cursor:not-allowed}
+.two-col{display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:start}
+fieldset{border:0;padding:0;min-width:0}
+legend{font-size:12px;font-weight:600;color:var(--mute);padding:0;margin-bottom:6px}
+.days-pick{display:flex;gap:6px}
+.day-chip{position:relative;width:36px;height:36px;border:1px solid var(--line);border-radius:8px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:var(--navy);cursor:pointer}
+.day-chip input{position:absolute;opacity:0;pointer-events:none}
+.day-chip:has(input:checked){background:var(--blue);border-color:var(--blue);color:#fff}
+.day-chip:has(input:focus-visible){outline:2px solid var(--blue);outline-offset:2px}
+.time-row{display:flex;gap:12px}
+.time-row .field{flex:1}
+.check{display:flex;gap:8px;align-items:center;font-size:14px;font-weight:400;color:var(--navy)}
+.check input{width:auto}
+.btns{display:flex;gap:12px}
+.btns .btn{flex:1}
+select.invalid{border-color:var(--coral)}
+tr.is-editing td{background:var(--blueL)}
+.badge-available{background:var(--blueL);color:var(--blue)}
+.badge-unavailable{color:var(--mute)}
