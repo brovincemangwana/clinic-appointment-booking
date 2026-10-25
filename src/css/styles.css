@@ -431,8 +431,8 @@ body.admin{display:flex;min-height:100vh}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .stat{padding:20px;display:flex;flex-direction:column;gap:4px}
 .stat b{font-size:28px}
-.filters{display:flex;gap:16px;align-items:flex-end;padding:20px}
-.filters .field{flex:1}
+.admin-main .filters{display:flex;gap:16px;align-items:flex-end;padding:20px}
+.admin-main .filters .field{flex:1}
 .table-card{padding:0;overflow-x:auto}
 table{width:100%;border-collapse:collapse}
 th{text-align:left;font-size:12px;font-weight:600;color:var(--mute);background:var(--bg);padding:12px}
@@ -460,3 +460,44 @@ select.invalid{border-color:var(--coral)}
 tr.is-editing td{background:var(--blueL)}
 .badge-available{background:var(--blueL);color:var(--blue)}
 .badge-unavailable{color:var(--mute)}
+@media (max-width:1024px){
+  .hero,.list{padding-left:40px;padding-right:40px}
+  .booking{padding-left:40px;padding-right:40px}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .booking-cols,.two-col{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:900px){
+  body.admin{flex-direction:column}
+  .side{width:100%;flex-direction:row;flex-wrap:wrap;align-items:center;gap:8px 16px;padding:16px}
+  .side .logo{margin-bottom:0}
+  .side nav{flex-direction:row}
+  .side .out{margin-top:0;margin-left:auto}
+  .admin-main{padding:24px 16px}
+  .filters{flex-wrap:wrap}
+  .filters .field{min-width:160px}
+}
+@media (max-width:640px){
+  .top{flex-wrap:wrap;gap:12px;padding:14px 16px}
+  .top nav{display:flex;flex-wrap:wrap;gap:4px 16px;width:100%}
+  .top nav a{margin-left:0}
+  .hero{padding:32px 16px}
+  .hero h1{font-size:28px}
+  .filters{flex-direction:column;align-items:stretch}
+  .filters .field{flex:none}
+  .field.narrow{width:100%}
+  .list,.booking{padding:24px 16px}
+  .list-head{flex-direction:column;align-items:flex-start;gap:4px}
+  .grid{grid-template-columns:1fr}
+  .profile{flex-direction:column;align-items:flex-start}
+  .dates{grid-template-columns:repeat(4,1fr)}
+  .slots{grid-template-columns:repeat(2,1fr)}
+  .lookup{padding:32px 16px}
+  .lookup-form{flex-direction:column}
+  .lookup-form .btn{margin-top:0;width:100%}
+  .appt{flex-direction:column;align-items:flex-start}
+  .appt-actions{flex-wrap:wrap}
+  .dialog-actions{flex-direction:column-reverse}
+  .dialog-actions .btn{width:100%}
+  .time-row{flex-direction:column}
+}
