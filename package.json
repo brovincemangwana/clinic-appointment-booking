@@ -26,6 +26,7 @@
   "homepage": "https://github.com/brovincemangwana/clinic-appointment-booking.#readme",
   "devDependencies": {
     "@vitest/coverage-v8": "^2.1.9",
+    "jsdom": "^25.0.1",
     "json-server": "^0.17.4",
     "vitest": "^2.1.9"
   }
