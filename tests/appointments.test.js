@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { buildAppointment, canModify, sortAppointments, buildRescheduled, countByStatus, filterAppointments, sortChronological } from '../src/js/appointments.js';
+import { buildAppointment, canModify, sortAppointments, buildRescheduled, countByStatus, filterAppointments, sortChronological, nextStatuses, canTransition } from '../src/js/appointments.js';
 const now = new Date('2026-10-24T08:00:00Z');
 const form = {
   doctorId: '1',
@@ -169,5 +169,42 @@ describe('admin helpers', () => {
   it('does not change the original list when sorting', () => {
     sortChronological(list);
     expect(ids(list)).toEqual([1, 2, 3, 4, 5]);
+  });
+});
+describe('status transitions', () => {
+  it('lets a Booked appointment be confirmed or cancelled', () => {
+    expect(nextStatuses('Booked')).toEqual(['Confirmed', 'Cancelled']);
+  });
+
+  it('lets a Confirmed appointment be completed or cancelled', () => {
+    expect(nextStatuses('Confirmed')).toEqual(['Completed', 'Cancelled']);
+  });
+
+  it('allows no changes once Completed or Cancelled', () => {
+    expect(nextStatuses('Completed')).toEqual([]);
+    expect(nextStatuses('Cancelled')).toEqual([]);
+  });
+
+  it('returns nothing for an unknown status', () => {
+    expect(nextStatuses('Pending')).toEqual([]);
+  });
+
+  it('returns a copy so callers cannot change the rules', () => {
+    nextStatuses('Booked').push('Completed');
+    expect(nextStatuses('Booked')).toEqual(['Confirmed', 'Cancelled']);
+  });
+
+  it('allows valid transitions', () => {
+    expect(canTransition('Booked', 'Confirmed')).toBe(true);
+    expect(canTransition('Confirmed', 'Completed')).toBe(true);
+  });
+
+  it('blocks moving backwards', () => {
+    expect(canTransition('Completed', 'Booked')).toBe(false);
+    expect(canTransition('Cancelled', 'Confirmed')).toBe(false);
+  });
+
+  it('blocks skipping a step', () => {
+    expect(canTransition('Booked', 'Completed')).toBe(false);
   });
 });
