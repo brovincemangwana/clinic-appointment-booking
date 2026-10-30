@@ -1,3 +1,4 @@
+import { requireStaff, logout } from './auth.js';
 import { getAppointments, getDoctors, patchAppointment } from './api.js';
 import {
   countByStatus,
@@ -81,4 +82,5 @@ resetButton.addEventListener('click', () => {
   draw();
 });
 
-init();
+document.querySelector('#sign-out').addEventListener('click', logout);
+if (requireStaff('admin.html')) init();

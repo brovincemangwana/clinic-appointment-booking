@@ -1,4 +1,6 @@
-import {
+
+document.querySelector('#sign-out').addEventListener('click', logout);
+if (requireStaff('admin-doctors.html')) init();import {
   getDoctors,
   getAppointments,
   createDoctor,

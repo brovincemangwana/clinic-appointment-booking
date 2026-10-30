@@ -8,6 +8,11 @@ const api = vi.hoisted(() => ({
   patchAppointment: vi.fn(),
 }));
 vi.mock('../src/js/api.js', () => api);
+vi.mock('../src/js/auth.js', () => ({
+  requireStaff: () => true,
+  logout: vi.fn(),
+  getToken: () => '',
+}));
 
 const doctors = [
   { id: 1, name: 'Dr. Amina Odhiambo' },
