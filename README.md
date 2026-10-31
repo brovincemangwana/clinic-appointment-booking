@@ -35,6 +35,7 @@ Many small and medium-sized clinics still book appointments by phone or walk-in.
 - Move appointments through Booked, Confirmed and Completed, or cancel them
 - Add, edit and delete doctors, including working days, hours and slot length
 - Block deleting a doctor who still has upcoming appointments
+- Staff login protects the admin pages and the API: write requests to doctors and staff-only appointment actions are rejected without a valid token
 
 | Booking | Admin |
 |---|---|
@@ -58,6 +59,7 @@ git clone git@github.com:brovincemangwana/clinic-appointment-booking.git
 cd clinic-appointment-booking
 npm install
 ```
+The staff password is read from the `ADMIN_PASSWORD` environment variable. `npm run api` falls back to `demo-password` locally. On Render, set `ADMIN_PASSWORD` under Environment. Never commit a real password.
 
 Start the API in one terminal (port 3000):
 
@@ -157,7 +159,8 @@ Work was done on feature branches (`feature/...`, `test/...`, `style/...`, `docs
 ## Known limitations
 
 - **Data resets on the live site.** Render's free instances have an ephemeral filesystem, so bookings and edits made on the live API are lost when it restarts or sleeps. Run the project locally to keep data.
-- **No authentication.** The admin pages and the API are open. This is acceptable for a learning project but not for real patient data.
+- **Patient actions have no accounts.** Anyone who knows a phone number can look up its appointments, and anyone who knows an appointment id can cancel it. Staff actions (editing doctors, changing statuses, listing all appointments) need the staff login.
+- **Staff sessions are short.** Login tokens last two hours and end when the API restarts or sleeps.
 - **Double bookings are only partly prevented.** The app re-checks availability just before saving, but JSON Server has no server-side validation, so two people booking at the same moment could still collide.
 
 ## License
