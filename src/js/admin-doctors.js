@@ -1,6 +1,5 @@
-
-document.querySelector('#sign-out').addEventListener('click', logout);
-if (requireStaff('admin-doctors.html')) init();import {
+import { requireStaff, logout } from './auth.js';
+import {
   getDoctors,
   getAppointments,
   createDoctor,
@@ -141,4 +140,5 @@ cancelButton.addEventListener('click', () => {
   draw();
 });
 
-init();
+document.querySelector('#sign-out').addEventListener('click', logout);
+if (requireStaff('admin-doctors.html')) init();
